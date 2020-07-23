@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+{% block page_content%}
+<h1>Gegenstände</h1>
+<div class="row">
+{% for gegenstand in gegenstaende %}
+    <div class="col-md-4">
+        <div class="card mb-2">
+            <img class="card-img-top" src="{% static gegenstand.image %}">
+            <div class="card-body">
+                <h5 class="card-title">{{ gegenstand.title }}</h5>
+                <p class="card-text">{{ gegenstand.description }}</p>
+                <a href="{% url "gegenstand_detail" gegenstand.pk%}" class="btn btn-primary">
+                Mehr erfahren
+                </a>
+            </div>
+        </div>
+    </div>
+    
+
+{% endfor %}
+</div>
+{% endblock %}

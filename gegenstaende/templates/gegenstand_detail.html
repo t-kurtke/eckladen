@@ -1,0 +1,18 @@
+{% extends "base.html"%}
+{% load static%}
+
+{%block page_content%}
+<h1>{{gegenstand.title}}</h1>
+<div class="row">
+    <div class="col-md8">
+        <img src="{%static gegenstand.image%}" alt=""width="100%">
+    </div>
+    <div class="col-md-4">
+        <h5>Beschreibung</h5>
+        <p>{{gegenstand.description}}</p>
+        <br>
+        <h5>Status</h5>
+        <p>{{gegenstand.status}}</p>
+    </div>
+</div>
+{%endblock%}
