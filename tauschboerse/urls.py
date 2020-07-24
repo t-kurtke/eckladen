@@ -20,5 +20,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('gegenstaende/', include('gegenstaende.urls')),
     path('blog/', include('blog.urls')),
-    path('', include('users.urls'))
+    path('accounts/', include('allauth.urls')),
+    path('', include('users.urls')),
+    path('invitations/', include('invitations.urls', namespace='invitations')),
 ]

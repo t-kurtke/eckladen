@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'blog',
     'users',
+    'user_invitations',
     'gegenstaende',
 
     'django.contrib.admin',
@@ -46,7 +47,8 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    
+
+    'invitations',
 
 ]
 
@@ -133,10 +135,14 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_REDIRECT_URL = '/dashboard'
-LOGOUT_REDIRECT_URL = '/dashboard'
+LOGIN_REDIRECT_URL = '/accounts/profile'
+LOGOUT_REDIRECT_URL = '/accounts/profile'
+SIGNUP_REDIRECT_URL = '/accounts/login'
 
 # EMAIL_HOST = 'localhost'
 # EMAIL_PORT = '1025'
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = 'tmp/app-messages'
+ACCOUNT_ADAPTER = 'invitations.models.InvitationsAdapter'
+INVITATIONS_INVITATION_ONLY = True
+INVITATIONS_ACCEPT_INVITE_AFTER_SIGNUP = True
