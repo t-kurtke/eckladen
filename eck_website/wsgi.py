@@ -1,5 +1,5 @@
 """
-WSGI config for tauschboerse project.
+WSGI config for eck_website project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tauschboerse.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'eck_website.settings')
 
 application = get_wsgi_application()

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from gegenstaende.models import Gegenstand
+from tauschboerse.models import Gegenstand
 # Create your views here.
 def gegenstaende_index(request):
     gegenstaende = Gegenstand.objects.all()
