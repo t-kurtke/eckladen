@@ -2,7 +2,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand" href="{% url 'gegenstaende_index' %}">Morgen</a>
+        <a class="navbar-brand" href="{% url 'blog_index' %}">Morgen</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -10,11 +10,37 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="{% url 'gegenstaende_index' %}">Home</a>
+              <a class="nav-link" href="{% url 'blog_index' %}">Home</a>
             </li>
+    {% if user.is_authenticated %}
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="{% url 'tauschboerse'%}" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Tauschbörse
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="{% url 'tauschboerse'%}">Alle Gegenstände</a>
+          <a class="dropdown-item" href="{% url 'gegenstand_create'%}">Gegenstand erstellen</a>
+          <a class="dropdown-item" href="{%url 'gegenstaende_user' request.user.username %}">Meine Gegenstände</a>
+        </div>
+      </li>
+
+                    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{user}}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a>
+          <a class="dropdown-item" href="{% url 'account_change_password'%} ">Change Password</a>
+        </div>
+      </li>
+    {% else %}
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'blog_index' %}">Blog</a>
+              <a class="nav-link" href="{% url 'account_login' %}">Login</a>
             </li>
+    {% endif %}
+
+
           </ul>
         </div>
     </div>
