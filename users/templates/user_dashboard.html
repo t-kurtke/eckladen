@@ -1,14 +1,70 @@
 {%extends 'base.html'%}
+{%load crispy_forms_tags%}
 {% block content %}
 Hello, {{ user.username|default:'Guest' }}!
 
-<div>
+<div class="container">
     {% if user.is_authenticated %}
-        <a href="{% url 'account_logout' %}">Logout</a>
-        <a href="{% url 'account_change_password'%} ">Change Password</a>
-    {% else %}
+    <div class="col">
+        <div class="row">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Contact</th>
+                    <th></th>
+                    <th></th>
+                    <th scope="col"><a href="{% url 'account_email' %}" class="btn btn-primary float-right">Edit</a>
+                    </th>
+                </tr>
+                </thead>
+                <tr>
+                    <td>{{user.profile.contact}}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <thead>
+                <tr>
+                    <th scope="col">Email</th>
+                    <th scope="col">verified</th>
+                    <th scope="col">primary</th>
+                    <th scope="col"><a href="{% url 'account_email' %}" class="btn btn-primary float-right">Edit</a>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                {%for email in user.emailaddress_set.all%}
+                <tr>
+                    <td>{{email.email}}</td>
+                    <td>{%if email.verified%}&middot;{%endif%}</td>
+                    <td>{%if email.primary%}&middot;{%endif%}</td>
+                    <td></td>
+                </tr>
+                {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <a href="{% url 'account_change_password'%} " class="btn btn-primary float-right">Change Password</a>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <a href="{% url 'user_delete'%} " class="btn btn-danger float-right">Delete Account</a>
+        </div>
+
+    </div>
+
+
+    <div class="row">
+        {%else%}
         <a href="{% url 'account_login' %}">Login</a>
-    {% endif %}
+        {%endif%}
+    </div>
+
 </div>
 
 {% endblock %}

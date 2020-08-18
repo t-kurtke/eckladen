@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
 
     'invitations',
+    'crispy_forms',
 
 ]
 
@@ -148,3 +149,7 @@ EMAIL_FILE_PATH = 'tmp/app-messages'
 ACCOUNT_ADAPTER = 'invitations.models.InvitationsAdapter'
 INVITATIONS_INVITATION_ONLY = True
 INVITATIONS_ACCEPT_INVITE_AFTER_SIGNUP = True
+
+CRISPY_TEMPLATE_TAG = 'bootstrap4'
+
+ACCOUNT_SIGNUP_FORM_CLASS = 'users.forms.SignupProfileForm'

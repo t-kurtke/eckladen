@@ -1,21 +1,25 @@
 from django.shortcuts import render, redirect
-from users.forms import Custom_user_creation_form
-from django.urls import reverse
-from django.contrib.auth import login
-
+from allauth.account.views import SignupView
+from users.forms import SignupProfileForm, UserDeleteForm
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 # Create your views here.
+
 def user_dashboard(request):
     return render(request, 'user_dashboard.html')
 
-def user_registration(request):
+@login_required
+def user_delete(request):
     if request.method == 'GET':
-        context = {
-            'form': Custom_user_creation_form,
-        }
-        return render(request, 'register.html', context)
+        return render(request, 'user_delete.html', {'form': UserDeleteForm})
     elif request.method == 'POST':
-        form = Custom_user_creation_form(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect(reverse('dashboard'))
+        request.user.delete()
+        messages.info(request, 'Your account has been deleted.')
+        return redirect('blog_index')
+
+# def user_edit_contact(request):
+#     if request.method == 'GET':
+#         return render(request, 'user_edit_contact.html', {'form': UserEditContactForm})
+#     elif request.method == 'POST':
+#         request.user.profile.contact
+#         return redirect('blog_index')

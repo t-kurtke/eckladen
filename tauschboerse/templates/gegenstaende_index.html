@@ -4,19 +4,19 @@
 <h1>Gegenstände</h1>
 <div class="row">
 {% for gegenstand in gegenstaende %}
-    <div class="col-md-4 d-flex align-items-stretch">
-        <div class="card mb-2" style="width: 18rem;" style="height: 12rem;">
-            <a href="{% url "gegenstand_detail" gegenstand.pk%}">
+    <div class="col-md-4  align-items-stretch">
+        <div class="card mb-2  mt-2" style="width: 18rem;">
+            <a href="{% url 'gegenstand_detail' gegenstand.pk%}">
             <img class="card-img-top" src="{{gegenstand.image.url }}">
             </a>
-            <div class="card-body">
+            <div class="card-body d-flex flex-column">
                 <h5 class="card-title">{{ gegenstand.title }}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">{{ gegenstand.user}}</h6>
                 <p class="card-text">{{ gegenstand.description }}</p>
                 <p class="card-text">Status: {{ gegenstand.status }}</p>
                 {%ifequal user gegenstand.user%}
-                <a href="{%url 'gegenstand_update' gegenstand.pk%}" class="btn btn-primary">Bearbeiten</a>
-                <a href="{%url 'gegenstand_delete' gegenstand.pk%}" class="btn btn-danger">Löschen</a>
+                <a href="{%url 'gegenstand_update' gegenstand.pk%}" class="btn btn-primary mt-auto">Bearbeiten</a>
+                <a href="{%url 'gegenstand_delete' gegenstand.pk%}" class="btn btn-danger mt-2">Löschen</a>
                 {%endifequal%}
             </div>
 

@@ -21,7 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('tauschboerse/', include('tauschboerse.urls')),
     path('blog/', include('blog.urls')),
-    path('accounts/', include('allauth.urls')),
+
     path('', include('users.urls')),
-    path('invitations/', include('invitations.urls', namespace='invitations')),
+    path('', include('user_invitations.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
