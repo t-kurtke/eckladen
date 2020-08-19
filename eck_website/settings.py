@@ -137,7 +137,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-
+MEDIA_ROOT = '~/eckladen/img'
 LOGIN_REDIRECT_URL = '/accounts/profile'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/profile'
 SIGNUP_REDIRECT_URL = '/accounts/login'
