@@ -25,7 +25,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS=['kurtke.pythonanywhere.com']
 
 
 # Application definition
@@ -72,7 +72,7 @@ ROOT_URLCONF = 'eck_website.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['eck_website/templates/'],
+         'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -155,6 +155,6 @@ CRISPY_TEMPLATE_TAG = 'bootstrap4'
 ACCOUNT_SIGNUP_FORM_CLASS = 'users.forms.SignupProfileForm'
 
 SECURE_HSTS_SECONDS=10
-ALLOWED_HOSTS=['kurtke.pythonanywhere.com']
+
 CSRF_COOKIE_SECURE=True
 SESSION_COOKIE_SECURE=True
