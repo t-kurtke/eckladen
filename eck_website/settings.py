@@ -9,8 +9,10 @@ https://docs.djangoproject.com/en/3.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
-
+from dotenv import load_dotenv
 import os
+
+load_dotenv()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,12 +22,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = os.getenv("django_secret_key")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = (os.getenv("debug") == "true")
 
-ALLOWED_HOSTS=['kurtke.pythonanywhere.com']
+if not (os.getenv("localhost") == "true"):
+    ALLOWED_HOSTS=['kurtke.pythonanywhere.com']
 
 
 # Application definition
@@ -85,7 +88,8 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'eck_website.wsgi.application'
+if not (os.getenv("localhost") == "true"):
+    WSGI_APPLICATION = 'eck_website.wsgi.application'
 
 
 # Database
@@ -102,21 +106,36 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
-AUTH_PASSWORD_VALIDATORS = [
-    # {
-    #     'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    # },
-    # {
-    #     'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    # },
-    # {
-    #     'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    # },
-    # {
-    #     'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    # },
-]
-
+if os.getenv("localhost") == "true":
+    AUTH_PASSWORD_VALIDATORS = [
+        # {
+        #     'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        # },
+        # {
+        #     'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        # },
+        # {
+        #     'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        # },
+        # {
+        #     'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        # },
+    ]
+else:
+    AUTH_PASSWORD_VALIDATORS = [
+        {
+            'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        },
+        {
+            'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        },
+        {
+            'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        },
+        {
+            'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        },
+    ]
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -155,7 +174,7 @@ CRISPY_TEMPLATE_TAG = 'bootstrap4'
 
 ACCOUNT_SIGNUP_FORM_CLASS = 'users.forms.SignupProfileForm'
 
-SECURE_HSTS_SECONDS=10
-
-CSRF_COOKIE_SECURE=True
-SESSION_COOKIE_SECURE=True
+if os.getenv("localhost") == "false":
+    SECURE_HSTS_SECONDS=10
+    CSRF_COOKIE_SECURE=True
+    SESSION_COOKIE_SECURE=True
