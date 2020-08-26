@@ -18,6 +18,10 @@ class Post(models.Model):
     def short_body(self):
         return (str(self.body)[:50] + '...') if len(str(self.body)) > 50 else str(self.body)
 
+class PostImage(models.Model):
+    image = models.ImageField(upload_to="img/")
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+
 class Comment(models.Model):
     def __str__(self):
         return  (str(self.body)[:75] + '...') if len(str(self.body)) > 75 else str(self.body)
