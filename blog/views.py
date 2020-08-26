@@ -18,13 +18,22 @@ class PostCreate(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        post = form.save(commit=False)
+        post = form.save()
+        category_form = CategoryForm(self.request.POST)
+        if category_form.is_valid():
+            post.categories.set([category_form.save(),])
+        post.save()
         if self.request.FILES:
-            for f in self.request.FILES.getlist('file'):
+            for f in self.request.FILES.getlist('file_field'):
                 image = PostImage()
                 image.image = f
                 image.post = post
+                image.save()
+
+
+
         return super().form_valid(form)
+
     def get_context_data(self, **kwargs):
         context = super(PostCreate, self).get_context_data(**kwargs)
         context['file_form'] = FileFieldForm
