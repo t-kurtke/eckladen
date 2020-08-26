@@ -29,9 +29,6 @@ class PostCreate(LoginRequiredMixin, CreateView):
                 image.image = f
                 image.post = post
                 image.save()
-
-
-
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
@@ -62,9 +59,11 @@ def blog_detail(request, pk):
             comment.save()
 
     comments = Comment.objects.filter(post=post)
+    images = PostImage.objects.filter(post=post)
     context = {
         'comments': comments,
         'post': post,
+        'images': images,
         'form': form,
     }
     return render(request, 'blog_detail.html', context)
