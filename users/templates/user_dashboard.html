@@ -47,13 +47,17 @@ Hello, {{ user.username|default:'Guest' }}!
     </div>
     <div class="row">
         <div class="col">
-            <a href="{% url 'account_change_password'%} " class="btn btn-primary float-right">Change Password</a>
-
+            <a href="{% url 'account_change_password'%} " class="btn btn-primary float-right">Passwort ändern</a>
+        </div>
+    </div>
+        <div class="row">
+        <div class="col">
+            <a href="{% url 'invitations:send-invite'%} " class="btn btn-primary float-right">Einladung versenden</a>
         </div>
     </div>
     <div class="row">
         <div class="col">
-            <a href="{% url 'user_delete'%} " class="btn btn-danger float-right">Delete Account</a>
+            <a href="{% url 'user_delete'%} " class="btn btn-danger float-right">Account löschen</a>
         </div>
 
     </div>

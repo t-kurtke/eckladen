@@ -36,8 +36,9 @@
                     </a>
 
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="{% url 'blog_index' %}">Alle News</a>
                         <a class="dropdown-item" href="{% url 'post_create' %}">News erstellen</a>
-                        <a class="dropdown-item" href="#">Meine
+                        <a class="dropdown-item" href="{%url 'posts_user' request.user.username%}">Meine
                             News</a>
                     </div>
                 </li>
@@ -46,6 +47,7 @@
                     <a class="nav-link" href="{% url 'blog_index' %}">News</a>
                 </li>
                 {%endif%}
+                {%comment%}
                 {% if user.is_authenticated %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
@@ -64,6 +66,7 @@
                     <a class="nav-link" href="#">Events</a>
                 </li>
                 {%endif%}
+                {%endcomment%}
                 {% if user.is_authenticated %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="{% url 'tauschboerse'%}" id="navbarDropdownMenuLink"
@@ -91,7 +94,7 @@
                 </li>
                 {% else %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'account_login' %}">Login</a>
+                    <a class="nav-link" href="{% url 'account_login' %}">Mitmachen</a>
                 </li>
                 {% endif %}
 

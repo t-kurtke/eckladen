@@ -7,9 +7,12 @@
         <h2><a href="{% url 'blog_detail' post.pk %}">{{ post.title}}</a></h2>
         <small>
         	{{post.created_on.date}} |&nbsp;
-        	Categories:&nbsp;
+
         	{% for category in post.categories.all %}
-        	<a href="{% url 'blog_category' category.name%}">
+                                {%if forloop.first%}
+                    	Categories:&nbsp;
+            {%endif%}
+        	<a href="{%url 'blog_category' category.category%}">
         		{{category.name}}
         	</a>&nbsp;
         	{% endfor %}

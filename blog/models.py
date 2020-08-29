@@ -1,18 +1,22 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 class Category(models.Model):
-    name = models.CharField(max_length=100)
+    category = models.CharField(max_length=100)
+    def __str__(self):
+        return self.category
 
 class Post(models.Model):
     def __str__(self):
         return str(self.title)
-
+    user = models.ForeignKey(User,on_delete=models.CASCADE, null=True, default=1)
     title = models.CharField(max_length=250)
     body = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
     categories = models.ManyToManyField('Category', related_name='posts')
+    def get_images(self):
+        return PostImage.objects.filter(post=self)
 
     @property
     def short_body(self):

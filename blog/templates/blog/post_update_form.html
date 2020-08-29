@@ -1,16 +1,24 @@
 {%extends 'base.html'%}
 {%load crispy_forms_tags%}
 {%block content%}
-<h2>Erstelle Post</h2>
+<h2>Bearbeite Post</h2>
+{%for img in images%}
+<img src="{{img.image.url}}" alt="..." class="img-thumbnail">
+<a href="{%url 'postimage_delete' img.pk%}" class="btn btn-danger mt-2">Löschen</a>
+{%endfor%}
 <form enctype="multipart/form-data" method="post">
     {%csrf_token%}
     <div class="form-col">
-    {{form|crispy}}
+        {{form|crispy}}
         {{file_form|crispy}}
+                	Categories:&nbsp;
+        	{% for category in post.categories.all %}
+
+        		{{category.category}}
+
+        	{% endfor %}
         {{category_form|crispy}}
-        <button type="submit" value="Save" class="btn btn-primary mt-2">Save</button>
-
+        <button type="submit" value="Save" class="btn btn-primary mt-2">Submit</button>
     </div>
-
 </form>
 {%endblock%}
