@@ -1,2 +1,2 @@
 # eckladen
-My first djano website
+My first djano website :)
